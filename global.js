@@ -11,8 +11,11 @@ document.getElementsByClassName('getValue')[0].addEventListener("click", functio
 })
 
 function trigger(value){
+  var dataHolder = 
   fetch('/v1/tensorflow/'+value).then(res=>{
     res.json().then(dataObj =>{
+      console.log(dataObj)
+      document.getElementsByClassName('dataHolder')[0].innerHTML = JSON.stringify(dataObj, undefined, 2);
       // trainX = dataObj.linearRegression.x
       // trainY = dataObj.linearRegression.y
       // m = tf.variable(tf.scalar(Math.random()));
