@@ -1,2 +1,2 @@
-##inicializa con npm start 
-##el contenido es visible en localhost:3000
+## Inicializa con npm start 
+## El contenido es visible en localhost:3000
