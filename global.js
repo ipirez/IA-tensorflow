@@ -2,24 +2,22 @@ var trainX = []
 var trainY = []
 var m = []
 var b = []
-function getNumber(){
-  let value = dom.getElementsByClass('totalPick').value
-  fetch('v1/tensorUpdate/'+value).then(res=>{
+
+document.getElementsByClassName('getValue')[0].addEventListener("click", function(){
+  var value = document.getElementsByClassName('inputValue')[0].value
+  if(!!value){
+    trigger(value)
+  }
+})
+
+function trigger(value){
+  fetch('/v1/tensorflow/'+value).then(res=>{
     res.json().then(dataObj =>{
-      m = tf.variable(tf.scalar(Math.random()));
-      b = tf.variable(tf.scalar(Math.random()));
-      plot()
-    })
-  })
-}
-function trigger(){
-  fetch('/v1/tensor/2').then(res=>{
-    res.json().then(dataObj =>{
-      trainX = dataObj.linearRegression.x
-      trainY = dataObj.linearRegression.y
-      m = tf.variable(tf.scalar(Math.random()));
-      b = tf.variable(tf.scalar(Math.random()));
-      plot()
+      // trainX = dataObj.linearRegression.x
+      // trainY = dataObj.linearRegression.y
+      // m = tf.variable(tf.scalar(Math.random()));
+      // b = tf.variable(tf.scalar(Math.random()));
+      // plot()
     })
   })
 }

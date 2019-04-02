@@ -21,11 +21,12 @@ app.get('/global.js',(req,res)=>{
   res.sendFile(path.join(__dirname+'/global.js'))
 })
 //-> services 
-app.get('/v1/tensor/:id',(req,res)=>{
+app.get('/v1/tensorflow/:id',(req,res)=>{
   var id = req.params.id
- init().then(data=>{
-   res.send(data)
- })
+  init(id).then(data=>{
+    res.send(data)
+  })
 })
+
 
 
