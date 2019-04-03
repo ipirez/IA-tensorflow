@@ -1,30 +1,85 @@
+const getValue = document.getElementsByClassName('getValue')[0]
+const getLinealGraphic = document.getElementsByClassName('getLinealGraphic')[0]
+const getLinealData = document.getElementsByClassName('getLinealData')[0]
+const getVariance = document.getElementsByClassName('getVariance')[0]
 var trainX = []
 var trainY = []
 var m = []
 var b = []
 
-document.getElementsByClassName('getValue')[0].addEventListener("click", function(){
-  var value = document.getElementsByClassName('inputValue')[0].value
+
+//event listeners
+getValue.addEventListener("click", function(){
+  let value = validateInput()
   if(!!value){
-    trigger(value)
+    triggerFind(value)
   }
 })
-
-function trigger(value){
-  var dataHolder = 
-  fetch('/v1/tensorflow/'+value).then(res=>{
+getLinealGraphic.addEventListener("click", function(){
+  let value = validateInput()
+  if(!!value){
+    triggerLinealGraphic(value)
+  } 
+})
+getLinealData.addEventListener("click",function(){
+  let value = validateInput()
+  if(!!value){
+    triggerLinealData(value)
+  }   
+})
+getVariance.addEventListener('click',function(){
+  let value = validateInput()
+  if(!!value){
+    triggerVariance(value)
+  }   
+})
+function triggerVariance(value){
+  fetch('/v1/tensorflow/variance/'+value).then(res=>{
     res.json().then(dataObj =>{
-      console.log(dataObj)
       document.getElementsByClassName('dataHolder')[0].innerHTML = JSON.stringify(dataObj, undefined, 2);
-      // trainX = dataObj.linearRegression.x
-      // trainY = dataObj.linearRegression.y
-      // m = tf.variable(tf.scalar(Math.random()));
-      // b = tf.variable(tf.scalar(Math.random()));
-      // plot()
     })
   })
 }
-
+//triggers
+function triggerLinealData(value){
+  fetch('/v1/tensorflow/regression/data/'+value).then(res=>{
+    res.json().then(dataObj =>{
+      document.getElementsByClassName('dataHolder')[0].innerHTML = JSON.stringify(dataObj, undefined, 2);
+    })
+  })
+}
+function triggerLinealGraphic(value){
+  fetch('/v1/tensorflow/regression/graphic/'+value).then(res=>{
+    res.json().then(dataObj =>{
+      trainX = dataObj.x
+      trainY = dataObj.y
+      m = tf.variable(tf.scalar(Math.random()));
+      b = tf.variable(tf.scalar(Math.random()));
+      plot()
+    })
+  })
+}
+function triggerFind(value){
+  fetch('/v1/tensorflow/'+value).then(res=>{
+    res.json().then(dataObj =>{
+      document.getElementsByClassName('dataHolder')[0].innerHTML = JSON.stringify(dataObj, undefined, 2);
+    })
+  })
+}
+//validations
+function validateInput(){
+  let value = document.getElementsByClassName('inputValue')[0].value
+  if(!!value){
+    return value
+  }
+  else{
+    alert('input vacio')
+    return null
+  }
+}
+/*
+//NOTE: this sections would not live here is just for speed development has to live in the backend 
+*/
     function predict(x) {
       return tf.tidy(function() {
         return m.mul(x).add(b);
@@ -101,7 +156,7 @@ function trigger(value){
               yAxes: [
                {
                   ticks: {
-                    max: 5000
+                    max: 20
                   }
                 }
               ],

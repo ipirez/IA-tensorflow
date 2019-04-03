@@ -21,6 +21,15 @@ this command would install all the requirements
 
 ## API structure 
 
-is an API RestFull structure express based; 
+is an API RestFull structure express based: 
 
-for request item by ID  -> `/v1/tensorflow/:id` (id as integer)
+for request items by typeId  -> `/v1/tensorflow/:typeId` 
+for request the graphic of regresion  by typId  -> `/v1/tensorflow/regression/graphic/:typeId` 
+for request the regresion data by typId  -> `/v1/tensorflow/regression/data/:typeId` 
+ for request variance and dispersion data by typId  ->  `/v1/tensorflow/variance/:typeId` 
+
+ all `:typeId` are integers
+
+ 
+ ## changelog
+ you can find the changelog at [here](changelog.md)
