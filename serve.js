@@ -40,7 +40,6 @@ app.get('/v1/tensorflow/regression/data/:id',(req,res)=>{
   })
 })
 app.get('/v1/tensorflow/variance/:id',(req,res)=>{
-  console.log('at varince ->')
   var id = req.params.id
   variance(id).then(data=>{
     res.send(data)
