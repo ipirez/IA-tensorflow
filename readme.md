@@ -24,8 +24,11 @@ this command would install all the requirements
 is an API RestFull structure express based: 
 
 for request items by typeId  -> `/v1/tensorflow/:typeId` 
+
 for request the graphic of regresion  by typId  -> `/v1/tensorflow/regression/graphic/:typeId` 
+
 for request the regresion data by typId  -> `/v1/tensorflow/regression/data/:typeId` 
+
  for request variance and dispersion data by typId  ->  `/v1/tensorflow/variance/:typeId` 
 
  all `:typeId` are integers
